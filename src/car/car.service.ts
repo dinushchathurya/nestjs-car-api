@@ -21,4 +21,13 @@ export class CarService {
         }
         return car;
     }
+
+    public deleteCar(id: number) {
+        const index = this.cars.findIndex((car) => car.id === id);
+        if (index === -1) {
+            throw new HttpException(`Car with given id ${id} not exists`, 404);
+        }
+        this.cars.slice(index, 1)
+        return this.cars;
+    }
 }
