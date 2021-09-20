@@ -22,6 +22,16 @@ export class CarService {
         return car;
     }
 
+    public updateCar(id: number, propertName: string, propertyValue: string) {
+        const index = this.cars.findIndex((car) => car.id === id);
+        if (index) {
+            throw new HttpException(`Car with given id ${id} not exists`, 404);
+        }
+        this.cars[index][propertName] = propertyValue;
+        return this.cars;
+    }
+
+
     public deleteCar(id: number) {
         const index = this.cars.findIndex((car) => car.id === id);
         if (index === -1) {
