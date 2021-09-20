@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Query, Put } from '@nestjs/common';
 import { CarService } from './car.service';
 import { createCarDto } from './createCar.dto';
 @Controller('car')
@@ -11,8 +11,8 @@ export class CarController {
         return this.carService.getCars();
     }
 
-    @Get(':/id')
-    public getCarByID(@Param('id') id:number) {
+    @Get(':id')
+    public async getCarByID(@Param('id') id:number) {
         return this.carService.getCarById(id)
     }
 
@@ -21,14 +21,14 @@ export class CarController {
         return this.carService.createCar(car);
     }
 
-    @Delete(':/id')
+    @Put(':id')
     public updateCar(@Param('id') id: number, @Query() query) {
-        const propertName = query.propery_name;
+        const propertName = query.property_name;
         const propertValue = query.property_value;
         return this.carService.updateCar(id, propertName, propertValue);
     }
 
-    @Delete(':/id')
+    @Delete(':id')
     public deletCar(@Param('id') id: number) {
         return this.carService.deleteCar(id)
     }
