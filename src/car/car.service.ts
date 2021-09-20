@@ -5,7 +5,12 @@ import { Cars } from './cars.mock';
 export class CarService {
 
     private cars = Cars;
-    public async getCars() {
+
+    public getCars() {
         return this.cars;
+    }
+
+    public createCar(car) {
+        return this.cars.push(car);
     }
 }
